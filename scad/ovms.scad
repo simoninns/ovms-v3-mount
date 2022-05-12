@@ -28,16 +28,19 @@ use <BOSL/shapes.scad>
 
 module render_ovms(toPrint)
 {
-    difference() {
-        cuboid([72,99,30], chamfer=3);
+    // This rendering is just for CAD assistance - not printing
+    if (!toPrint) {
+        difference() {
+            cuboid([72,99,30], chamfer=3);
 
-        // Label recess
-        move([0,0,-15.5]) cuboid([30,60,2]);
-    }
+            // Label recess
+            move([0,0,-15.5]) cuboid([30,60,2]);
+        }
 
-    // Antenna and GPS connectors
-    move([-30 + 11,0,0]) {
-        move([-5.5,-53.5,0]) ycyl(h=8, d=6.5);
-        move([+5.5,-53.5,0]) ycyl(h=8, d=6.5);
+        // Antenna and GPS connectors
+        move([-30 + 11,0,0]) {
+            move([-5.5,-53.5,0]) ycyl(h=8, d=6.5);
+            move([+5.5,-53.5,0]) ycyl(h=8, d=6.5);
+        }
     }
 }

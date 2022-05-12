@@ -32,9 +32,7 @@ module backplate_cross()
     move([0,-((99+4)/2) + 1,-11]) cuboid([14,2,8], chamfer=1, edges=EDGES_Z_ALL); 
 }
 
-// 22x16
-
-module render_backplate(toPrint)
+module backplate()
 {
     move([+24,0,0]) backplate_cross();
     move([-24,0,0]) backplate_cross();
@@ -68,4 +66,10 @@ module render_backplate(toPrint)
         move([8,52,-15]) cuboid([30,10,4]);
         move([8,((99+4)/2) +2,-11]) cuboid([30,6,8]); 
     }
+}
+
+module render_backplate(toPrint)
+{
+    if (toPrint) move([0,0,19]) backplate();
+    else backplate();
 }

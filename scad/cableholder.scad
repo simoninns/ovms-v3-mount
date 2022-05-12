@@ -26,7 +26,7 @@ include <BOSL/constants.scad>
 use <BOSL/transforms.scad>
 use <BOSL/shapes.scad>
 
-module render_cableholder(toPrint)
+module cableholder()
 {   
     move([0,0,-24]) {
         difference() {
@@ -53,4 +53,10 @@ module render_cableholder(toPrint)
             move([-6,0,-1]) zcyl(h=14, d=3.5);
         }
     }
+}
+
+module render_cableholder(toPrint)
+{
+    if (toPrint) move([0,0,31]) cableholder();   
+    else cableholder();
 }
