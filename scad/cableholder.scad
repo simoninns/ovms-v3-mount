@@ -28,35 +28,27 @@ use <BOSL/shapes.scad>
 
 module cableholder()
 {   
-    move([0,0,-24]) {
-        difference() {
-            cuboid([38,60,10], fillet=14, edges=EDGES_Z_ALL);
-            cuboid([38-4,60-4,12], fillet=12, edges=EDGES_Z_ALL);
-        }
-        
-
+    move([0,0,-29]) {
         difference() {
             union() {
-                hull() {
-                    move([+6,0,-1]) zcyl(h=12, d=12);
-                    move([-6,0,-1]) zcyl(h=12, d=12);
-                }
-                move([0,0,-6]) cuboid([54,80,2], chamfer=1, edges=EDGES_Z_ALL);
+                cuboid([38,60,20], fillet=14, edges=EDGES_Z_ALL);
+                move([0,0,-9]) cuboid([70,94,2], chamfer=1, edges=EDGES_Z_ALL);
             }
+            cuboid([38-4,60-4,22], fillet=12, edges=EDGES_Z_ALL);
+        }
 
-            move([0,0,-3]) hull() {
-                move([+6,0,-1]) zcyl(h=14, d=10);
-                move([-6,0,-1]) zcyl(h=14, d=10);
-            }
+        move([0,0,5]) {
+            move([18,0,7]) cuboid([2,10,4]);
+            move([-18,0,7]) cuboid([2,10,4]);
 
-            move([+6,0,-1]) zcyl(h=14, d=3.5);
-            move([-6,0,-1]) zcyl(h=14, d=3.5);
+            move([+17,0,8.25]) yrot(45) cuboid([1,10,1]);
+            move([-17,0,8.25]) yrot(45) cuboid([1,10,1]);
         }
     }
 }
 
 module render_cableholder(toPrint)
 {
-    if (toPrint) move([0,0,31]) cableholder();   
+    if (toPrint) move([0,0,39]) cableholder();   
     else cableholder();
 }

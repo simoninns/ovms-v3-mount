@@ -32,24 +32,39 @@ module backplate_cross()
     move([0,-((99+4)/2) + 1,-11]) cuboid([14,2,8], chamfer=1, edges=EDGES_Z_ALL); 
 }
 
+module clip()
+{
+    difference() {
+        union() {
+            move([-16.5,0,-17.85]) cuboid([1,10,2.25]);
+            move([-16,0,-16.75]) yrot(45) right_triangle([1.5,10,1.5], center=true);
+        }
+
+        move([-17.25,0,-18]) cuboid([1,12,3.25]);
+    }
+}
+
 module backplate()
 {
-    move([+24,0,0]) backplate_cross();
-    move([-24,0,0]) backplate_cross();
+    difference() {
+        union() {
+            move([+24,0,0]) backplate_cross();
+            move([-24,0,0]) backplate_cross();
 
-    move([0,44.5,-17]) cuboid([60,14,4], chamfer=1, edges=EDGES_Z_ALL);
-    move([8,((99+4)/2) - 1,-13]) cuboid([30,2,8], chamfer=1, edges=EDGES_Z_ALL); 
+            move([0,44.5,-17]) cuboid([60,14,4], chamfer=1, edges=EDGES_Z_ALL);
+            move([8,((99+4)/2) - 1,-13]) cuboid([30,2,8], chamfer=1, edges=EDGES_Z_ALL);
 
-    // Centre cross-member
-    move([0,0,-17]) {
-        difference() {
-            cuboid([60,14,4], chamfer=1, edges=EDGES_Z_ALL);
-            move([+6,0,0]) zcyl(h=6, d=3.5);
-            move([-6,0,0]) zcyl(h=6, d=3.5);
-            move([+6,0,5 - 2.5]) zcyl(h=6, d=6.5);
-            move([-6,0,5 - 2.5]) zcyl(h=6, d=6.5);
+            move([18,0,-17]) cuboid([10,18,4], chamfer=2, edges=EDGES_Z_ALL);
+            move([-18,0,-17]) cuboid([10,18,4], chamfer=2, edges=EDGES_Z_ALL);
         }
+
+        move([18,0,-17]) cuboid([4,10,6]);
+        move([-18,0,-17]) cuboid([4,10,6]);
     }
+
+    // Clip
+    clip();
+    zrot(180) clip();
 
     move([0,0,-2]) {
         // 4G Antenna mount
